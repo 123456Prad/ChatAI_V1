@@ -11,11 +11,13 @@ from langchain.text_splitter import RecursiveCharacterTextSplitter
 
 # My OpenAI Key
 import os
+from dotenv import load_dotenv
 # GPT 3.5 API Kay
-# os.environ['OPENAI_API_KEY'] = "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"
 
 # GPT4 API Key
-os.environ['OPENAI_API_KEY'] = "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"
+
+load_dotenv()
+openai_api_key = os.getenv('openai_api_key')
 
 # Page configuration for Simple PDF App
 st.set_page_config(
@@ -27,7 +29,7 @@ st.set_page_config(
 
 # OPENAI_API_KEY = st.secrets["OPENAI_API_KEY"]
 st.sidebar.subheader("Setup")
-OPENAI_API_KEY = "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"
+
 st.sidebar.subheader("Model Selection")
 llm_model_options = ['gpt-3.5-turbo', 'gpt-3.5-turbo-16k','gpt-4']  # Add more models if available
 model_select = st.sidebar.selectbox('Select LLM Model:', llm_model_options, index=0)

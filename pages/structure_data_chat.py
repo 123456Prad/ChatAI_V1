@@ -8,6 +8,8 @@ import streamlit as st
 import pandas as pd
 import os
 
+from dotenv import load_dotenv
+
 from langchain.agents import AgentType
 from langchain_experimental.agents.agent_toolkits.pandas.base import create_pandas_dataframe_agent
 from langchain.callbacks.streamlit import StreamlitCallbackHandler
@@ -22,9 +24,11 @@ import pandas as pd
 # My OpenAI Key
 import os
 # GPT 3.5 Api Key
-# os.environ['OPENAI_API_KEY'] = "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"
 # GPT4 Api Key
-os.environ['OPENAI_API_KEY'] = "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"
+load_dotenv()
+openai_api_key = os.getenv('OPENAI_API_KEY')
+
+# Load environment variables from .env file
 
 file_formats = {
     "csv": pd.read_csv,
@@ -69,10 +73,8 @@ uploaded_file = st.file_uploader(
 if uploaded_file:
     df = load_data(uploaded_file)
 # GPT3.5 Key
-# openai_api_key = "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"
 
 # GPT4 Key
-openai_api_key = "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"
 
 chat_data = st.sidebar.selectbox("Choose a Backend", ['pandasai', 'langchain'])
 
